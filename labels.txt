@@ -1,0 +1,5 @@
+0 Plastica
+1 Carta
+2 Vetro
+3 Umido
+4 Alluminio
