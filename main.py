@@ -32,10 +32,10 @@ async def duck(ctx):
 async def check(ctx):
     if ctx.message.attachments:
         for attachment in ctx.message.attachments:
-            file_name = attachment.filename
-            file_url = attachment.url
-            await attachment.save(f"./{attachment.filename}")
-            await ctx.send(get_class(model_path="./keras_model.h5", labels_path="labels.txt", image_path=f"./{attachment.filename}"))
+            file_name = "img/temp." + attachment.filename.split('.')[-1]
+            await attachment.save(f"./{file_name}")
+            class_name, score = get_class(model_path="./keras_model.h5", labels_path="labels.txt", image_path=f"./{file_name}")
+            await ctx.send(f'Io penso che sia **{class_name[:-1]}** e sono sicuro al **{(score * 100) // 1}%**')
     else:
         await ctx.send("You forgot to upload the image :(")
 
